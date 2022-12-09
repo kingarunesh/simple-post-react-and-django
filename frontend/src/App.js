@@ -21,8 +21,9 @@ function App() {
   return (
     <div className="App">
       <h2>ReactJS and Django</h2>
+      <br />
 
-      <PostList />
+      <PostList posts={posts} />
     </div>
   );
 }

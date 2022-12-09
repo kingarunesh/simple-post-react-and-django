@@ -6,9 +6,12 @@ const PostList = (props) => {
       {props.posts &&
         props.posts.map((post) => {
           return (
-            <div key={post.id}>
-              <h2>{post.title}</h2>
-              <p>{post.description}</p>
+            <div>
+              <div key={post.id}>
+                <h2>{post.title}</h2>
+                <p>{post.description}</p>
+              </div>
+              <hr />
             </div>
           );
         })}
