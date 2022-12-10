@@ -1,6 +1,10 @@
 import React from "react";
 
 const PostList = (props) => {
+  const editPost = (post) => {
+    props.editPost(post);
+  };
+
   return (
     <React.Fragment>
       {props.posts &&
@@ -13,7 +17,12 @@ const PostList = (props) => {
 
                 <div className="row">
                   <div className="col-md-1">
-                    <button className="btn btn-info">Update</button>
+                    <button
+                      className="btn btn-info"
+                      onClick={() => editPost(post)}
+                    >
+                      Update
+                    </button>
                   </div>
 
                   <div className="col-md-1">
