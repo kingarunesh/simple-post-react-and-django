@@ -24,6 +24,18 @@ function App() {
     setUpdatePost(post);
   };
 
+  const updateInformation = (post) => {
+    const newPost = posts.map((mypost) => {
+      if (mypost.id === post.id) {
+        return post;
+      } else {
+        return mypost;
+      }
+    });
+
+    setPosts(newPost);
+  };
+
   return (
     <div className="App">
       <h2>ReactJS and Django</h2>
@@ -31,7 +43,9 @@ function App() {
 
       <PostList posts={posts} editPost={editPost} />
 
-      {updatePost ? <Form post={updatePost} /> : null}
+      {updatePost ? (
+        <Form post={updatePost} updateInformation={updateInformation} />
+      ) : null}
     </div>
   );
 }
