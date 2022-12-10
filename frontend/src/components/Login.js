@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import APIService from "../APIService";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [token, setToken] = useCookies(["mytoken"]);
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (token["mytoken"]) {
+      navigate("/");
+    }
+  }, [token]);
+
   const loginBtn = () => {
     APIService.LoginUser({ username, password })
-      .then((res) => console.log(res))
+      .then((res) => setToken("mytoken", res.token))
       .catch((e) => console.log(e));
   };
 
