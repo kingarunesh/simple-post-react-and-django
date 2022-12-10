@@ -1,8 +1,15 @@
 import React, { useState } from "react";
+import APIService from "../APIService";
 
 const Form = (props) => {
   const [title, setTitle] = useState(props.post.title);
   const [description, setDescription] = useState(props.post.description);
+
+  const updatePost = () => {
+    APIService.UpdatePost(props.post.id, { title, description }).then((res) => {
+      console.log(res);
+    });
+  };
 
   return (
     <React.Fragment>
@@ -10,7 +17,7 @@ const Form = (props) => {
         {props.post ? (
           <div>
             <h1>FORM</h1>
-            <div className="col-md-5">
+            <div className="col-md-10">
               <label htmlFor="title" className="form-label">
                 Title
               </label>
@@ -34,7 +41,9 @@ const Form = (props) => {
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
               <br />
-              <button className="btn btn-primary">Update</button>
+              <button onClick={updatePost} className="btn btn-primary">
+                Update
+              </button>
             </div>
           </div>
         ) : null}
