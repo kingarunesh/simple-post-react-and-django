@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import PostList from "./components/PostList";
 import Form from "./components/Form";
+import { useCookies } from "react-cookie";
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [updatePost, setUpdatePost] = useState(null);
+  const [token] = useCookies(["mytoken"]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/articles/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Token 3d19191fed162709799a684104eda11498965405",
+        Authorization: `Token ${token["mytoken"]}`,
       },
     })
       .then((response) => response.json())
