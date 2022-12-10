@@ -36,15 +36,38 @@ function App() {
     setPosts(newPost);
   };
 
+  const createPostForm = () => {
+    setUpdatePost({ title: "", description: "" });
+  };
+
+  const insertInformation = (post) => {
+    setPosts([...posts, post]);
+  };
+
   return (
     <div className="App">
-      <h2>ReactJS and Django</h2>
+      <div className="row">
+        <div className="col">
+          <h2>ReactJS and Django</h2>
+        </div>
+
+        <div className="col">
+          <button className="btn btn-primary" onClick={createPostForm}>
+            Create Post
+          </button>
+        </div>
+      </div>
+
       <br />
 
       <PostList posts={posts} editPost={editPost} />
 
       {updatePost ? (
-        <Form post={updatePost} updateInformation={updateInformation} />
+        <Form
+          post={updatePost}
+          updateInformation={updateInformation}
+          insertInformation={insertInformation}
+        />
       ) : null}
     </div>
   );

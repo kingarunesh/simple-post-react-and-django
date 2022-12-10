@@ -16,6 +16,12 @@ const Form = (props) => {
     });
   };
 
+  const addNewPost = () => {
+    APIService.CreateNewPost({ title, description }).then((response) =>
+      props.insertInformation(response)
+    );
+  };
+
   return (
     <React.Fragment>
       <div>
@@ -46,9 +52,15 @@ const Form = (props) => {
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
               <br />
-              <button onClick={updatePost} className="btn btn-primary">
-                Update
-              </button>
+              {props.post.id ? (
+                <button onClick={updatePost} className="btn btn-primary">
+                  Update
+                </button>
+              ) : (
+                <button onClick={addNewPost} className="btn btn-primary">
+                  Create New Post
+                </button>
+              )}
             </div>
           </div>
         ) : null}
