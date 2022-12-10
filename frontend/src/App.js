@@ -44,6 +44,17 @@ function App() {
     setPosts([...posts, post]);
   };
 
+  const deleteBtn = (post) => {
+    const newPostList = posts.filter((mypost) => {
+      if (mypost.id === post.id) {
+        return false;
+      }
+      return true;
+    });
+
+    setPosts(newPostList);
+  };
+
   return (
     <div className="App">
       <div className="row">
@@ -60,7 +71,7 @@ function App() {
 
       <br />
 
-      <PostList posts={posts} editPost={editPost} />
+      <PostList posts={posts} editPost={editPost} deleteBtn={deleteBtn} />
 
       {updatePost ? (
         <Form
