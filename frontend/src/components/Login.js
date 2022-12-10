@@ -9,6 +9,8 @@ const Login = () => {
 
   const [token, setToken] = useCookies(["mytoken"]);
 
+  const [isLogin, setLogin] = useState(true);
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -23,10 +25,12 @@ const Login = () => {
       .catch((e) => console.log(e));
   };
 
+  const registerBtn = () => {};
+
   return (
     <React.Fragment>
       <div className="App">
-        <h1>Login</h1>
+        {isLogin ? <h1>Please, Login</h1> : <h1>Create New Account</h1>}
         <div>
           <label htmlFor="username" className="form-label">
             Username
@@ -56,9 +60,40 @@ const Login = () => {
 
           <br />
 
-          <button onClick={loginBtn} className="btn btn-primary">
-            Login
-          </button>
+          {isLogin ? (
+            <button onClick={loginBtn} className="btn btn-primary">
+              Login
+            </button>
+          ) : (
+            <button onClick={registerBtn} className="btn btn-primary">
+              Register
+            </button>
+          )}
+
+          <div className="mb-3">
+            <br />
+            {isLogin ? (
+              <h5>
+                Don't have an account{" "}
+                <button
+                  className="btn btn-primary"
+                  onClick={() => setLogin(false)}
+                >
+                  Register
+                </button>
+              </h5>
+            ) : (
+              <h5>
+                Have an account{" "}
+                <button
+                  className="btn btn-primary"
+                  onClick={() => setLogin(true)}
+                >
+                  Login
+                </button>
+              </h5>
+            )}
+          </div>
         </div>
       </div>
     </React.Fragment>
