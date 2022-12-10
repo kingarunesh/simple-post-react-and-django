@@ -25,7 +25,11 @@ const Login = () => {
       .catch((e) => console.log(e));
   };
 
-  const registerBtn = () => {};
+  const registerBtn = () => {
+    APIService.RegisterUser({ username, password })
+      .then((res) => loginBtn())
+      .catch((error) => console.log(error));
+  };
 
   return (
     <React.Fragment>
