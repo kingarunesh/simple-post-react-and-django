@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Form = (props) => {
+  const [title, setTitle] = useState(props.post.title);
+  const [description, setDescription] = useState(props.post.description);
+
   return (
     <React.Fragment>
       <div>
@@ -8,12 +11,18 @@ const Form = (props) => {
           <div>
             <h1>FORM</h1>
             <div className="col-md-5">
-              <label for="title" className="form-label">
+              <label htmlFor="title" className="form-label">
                 Title
               </label>
-              <input type="text" id="title" className="form-control" />
+              <input
+                type="text"
+                id="title"
+                className="form-control"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
               <br />
-              <label for="description" className="form-label">
+              <label htmlFor="description" className="form-label">
                 Description
               </label>{" "}
               <br />
@@ -21,6 +30,8 @@ const Form = (props) => {
                 id="description"
                 rows="5"
                 className="form-control"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               ></textarea>
               <br />
               <button className="btn btn-primary">Update</button>

@@ -10,24 +10,22 @@ const PostList = (props) => {
       {props.posts &&
         props.posts.map((post) => {
           return (
-            <div>
-              <div key={post.id}>
-                <h2>{post.title}</h2>
-                <p>{post.description}</p>
+            <div key={post.id}>
+              <h2>{post.title}</h2>
+              <p>{post.description}</p>
 
-                <div className="row">
-                  <div className="col-md-1">
-                    <button
-                      className="btn btn-info"
-                      onClick={() => editPost(post)}
-                    >
-                      Update
-                    </button>
-                  </div>
+              <div className="row">
+                <div className="col-md-1">
+                  <button
+                    className="btn btn-info"
+                    onClick={() => editPost(post)}
+                  >
+                    Update
+                  </button>
+                </div>
 
-                  <div className="col-md-1">
-                    <button className="btn btn-danger">Delete</button>
-                  </div>
+                <div className="col-md-1">
+                  <button className="btn btn-danger">Delete</button>
                 </div>
               </div>
               <hr />

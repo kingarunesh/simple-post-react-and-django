@@ -31,7 +31,7 @@ function App() {
 
       <PostList posts={posts} editPost={editPost} />
 
-      <Form post={updatePost} />
+      {updatePost ? <Form post={updatePost} /> : null}
     </div>
   );
 }
