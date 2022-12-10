@@ -1,4 +1,4 @@
-from api.serializers import ArticleSerializer, UserSerializer
+from api.serializers import ArticleSerializer, UserSerializer, ProfileUser
 from api.models import Article
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
@@ -17,3 +17,10 @@ class ArticleViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = ProfileUser
+    permission_classes = [IsAuthenticated]
+    authentication_classes = (TokenAuthentication,)
