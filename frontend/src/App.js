@@ -3,11 +3,14 @@ import "./App.css";
 import PostList from "./components/PostList";
 import Form from "./components/Form";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [updatePost, setUpdatePost] = useState(null);
-  const [token] = useCookies(["mytoken"]);
+  const [token, setToken, removeToken] = useCookies(["mytoken"]);
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/articles/", {
@@ -57,6 +60,17 @@ function App() {
     setPosts(newPostList);
   };
 
+  useEffect(() => {
+    if (!token["mytoken"]) {
+      //   navigate("/login");
+      window.location.href = "/login";
+    }
+  }, [token]);
+
+  const logout = () => {
+    removeToken(["mytoken"]);
+  };
+
   return (
     <div className="App">
       <div className="row">
@@ -67,6 +81,12 @@ function App() {
         <div className="col">
           <button className="btn btn-primary" onClick={createPostForm}>
             Create Post
+          </button>
+        </div>
+
+        <div className="col">
+          <button className="btn btn-danger" onClick={logout}>
+            LogOut
           </button>
         </div>
       </div>
